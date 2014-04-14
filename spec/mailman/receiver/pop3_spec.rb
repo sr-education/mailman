@@ -41,6 +41,11 @@ describe Mailman::Receiver::POP3 do
       @receiver.connection.mails.should be_empty
     end
 
+    it 'should not delete the messages after processing if delete_messages is set to false' do
+      @receiver_optons[:delete_messages] = false
+      @receiver.get_messages
+      @receiver.connection.mails.should_not be_empty
+    end
   end
 
 end

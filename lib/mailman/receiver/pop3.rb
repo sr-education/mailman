@@ -24,6 +24,7 @@ module Mailman
         @connection.enable_ssl(OpenSSL::SSL::VERIFY_NONE) if options[:ssl]
         @connection.open_timeout = options[:open_timeout] if options[:open_timeout]
         @connection.read_timeout = options[:read_timeout] if options[:read_timeout]
+        @delete_messages = options[:delete_messages] || true
       end
 
       # Connects to the POP3 server.
@@ -42,7 +43,7 @@ module Mailman
         @connection.each_mail do |message|
           @processor.process(message.pop)
         end
-        @connection.delete_all
+        @connection.delete_all if @delete_messages
       end
 
     end

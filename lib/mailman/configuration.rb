@@ -34,6 +34,9 @@ module Mailman
     # connections.
     attr_accessor :graceful_death
 
+    # set whether or not to delete messages after retrieval/processing on the server
+    attr_accessor :delete_messages
+
     def middleware
       @middleware ||= Mailman::Middleware.new
     end
@@ -52,6 +55,10 @@ module Mailman
 
     def rails_root
       @rails_root.nil? ? '.' : @rails_root
+    end
+
+    def delete_messages
+      @delete_messages.nil? ? true : @delete_messages
     end
 
     def self.from_hash(options)

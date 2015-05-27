@@ -1,3 +1,32 @@
+## 0.7.3 (March 17, 2015)
+
+Features
+
+  - STARTTLS for IMAP
+  - Allow passing options to OpenSSL for POP3/IMAP
+
+Security fixes
+
+  - Enable certificate validation for POP3
+
+Bugfixes
+
+  - Added retry logic to handle connection errors gracefully
+
+## 0.7.2 (June 9, 2014)
+
+Bugfixes
+
+  - Allow newer versions of the `listen` gem
+
+## 0.7.1 (June 6, 2014)
+
+Bugfixes
+
+  - Update to listen 2.2.0
+  - Handle POP3 receiver crashes better
+
+
 ## 0.7.0 (August 11, 2013)
 
 Features
@@ -12,7 +41,7 @@ Features
 
 Features
 
-  - IMAP: Mark messages as seen instead of deleting them (see [5b6aef0](https://github.com/titanous/mailman/commit/5b6aef0163f0f28c790abf3083cbda7cbc9cc13f) for details on how revert to the previous behaviour)
+  - IMAP: Mark messages as seen instead of deleting them (see [5b6aef0](https://github.com/mailman/mailman/commit/5b6aef0163f0f28c790abf3083cbda7cbc9cc13f) for details on how revert to the previous behaviour)
 
 Bugfixes
 

@@ -14,16 +14,14 @@ describe Mailman::Receiver::POP3 do
   end
 
   describe 'connection' do
-
     it 'should connect to a POP3 server' do
-      @receiver.connect.should be_true
+      expect(@receiver.connect).to be_truthy
     end
 
     it 'should disconnect from a POP3 server' do
       @receiver.connect
-      @receiver.disconnect.should be_true
+      expect(@receiver.disconnect).to be_truthy
     end
-
   end
 
   describe 'message reception' do
@@ -32,13 +30,13 @@ describe Mailman::Receiver::POP3 do
     end
 
     it 'should get messages and process them' do
-      @processor.should_receive(:process).twice.with(/test/)
+      expect(@processor).to receive(:process).twice.with(/test/)
       @receiver.get_messages
     end
 
     it 'should delete the messages after processing' do
       @receiver.get_messages
-      @receiver.connection.mails.should be_empty
+      expect(@receiver.connection.mails).to be_empty
     end
 
     it 'should not delete the messages after processing if delete_messages is set to false' do
@@ -48,4 +46,10 @@ describe Mailman::Receiver::POP3 do
     end
   end
 
+  describe 'started connection' do
+    it 'should return the same of connection when started' do
+      expect_any_instance_of(MockPOP3).to receive(:started?)
+      @receiver.started?
+    end
+  end
 end

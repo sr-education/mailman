@@ -5,9 +5,14 @@ module Mailman
     class ToCondition < Condition
       def match(message)
         if !message.to.nil?
-          message.to.each do |address|
-            if result = @matcher.match(address)
-              return result
+          if message.to.is_a?(String)
+            result = @matcher.match(message.to)
+            return result if result
+          else
+            message.to.each do |address|
+              if result = @matcher.match(address)
+                return result
+              end
             end
           end
         end
@@ -53,9 +58,14 @@ module Mailman
     class CcCondition < Condition
       def match(message)
         if !message.cc.nil?
-          message.cc.each do |address|
-            if result = @matcher.match(address)
-              return result
+          if message.cc.is_a?(String)
+            result = @matcher.match(message.cc)
+            return result if result
+          else
+            message.cc.each do |address|
+              if result = @matcher.match(address)
+                return result
+              end
             end
           end
         end
